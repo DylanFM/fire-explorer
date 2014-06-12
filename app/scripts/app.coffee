@@ -11,6 +11,5 @@
 angular
   .module('fireExplorerApp', [
     'ngCookies',
-    'ngResource',
     'ngSanitize'
   ])
