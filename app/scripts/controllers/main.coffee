@@ -8,9 +8,5 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
+  .controller 'MainCtrl', ->
+    # And here's something?
