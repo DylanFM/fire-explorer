@@ -27,7 +27,7 @@ angular.module('fireExplorerApp')
         else '#cccccc' # 'Not Applicable'
 
     # Load data
-    $http.get('http://localhost:3000/1.0/incidents').success (data, status) ->
+    $http.get('http://api.bushfir.es/1.0/incidents').success (data, status) ->
       angular.extend $scope,
         geojson:
           data: data
