@@ -400,6 +400,48 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // S3 deployment settings
+    aws: grunt.file.readJSON('./aws.json'),
+    s3: {
+      options: {
+        key: '<%= aws.key %>',
+        secret: '<%= aws.secret %>',
+        bucket: '<%= aws.bucket %>',
+        region: '<%= aws.region %>',
+        access: 'public-read',
+        headers: {
+          // Two Year cache policy (1000 * 60 * 60 * 24 * 730)
+          "Cache-Control": "max-age=630720000, public",
+          "Expires": new Date(Date.now() + 63072000000).toUTCString()
+        },
+        gzip: true
+      },
+      dev: {
+        upload: [
+          {
+            src: 'dist/*',
+            dest: '/'
+          },
+          {
+            src: 'dist/images/*',
+            dest: '/images/'
+          },
+          {
+            src: 'dist/scripts/*',
+            dest: '/scripts/'
+          },
+          {
+            src: 'dist/styles/*',
+            dest: '/styles/'
+          },
+          {
+            src: 'dist/views/*',
+            dest: '/views/'
+          }
+        ]
+      }
     }
   });
 
@@ -447,6 +489,10 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    's3'
   ]);
 
   grunt.registerTask('default', [
