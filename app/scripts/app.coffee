@@ -11,5 +11,6 @@
 angular
   .module('fireExplorerApp', [
     'ngCookies',
-    'ngSanitize'
+    'ngSanitize',
+    'leaflet-directive'
   ])
