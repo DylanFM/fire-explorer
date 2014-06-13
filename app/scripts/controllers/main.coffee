@@ -8,11 +8,16 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope, $http, leafletData) ->
+  .controller 'MainCtrl', ($scope, $http, leafletData, leafletBoundsHelpers) ->
     # Config leaflet for mapbox
     angular.extend $scope,
       defaults:
         tileLayer: 'https://{s}.tiles.mapbox.com/v3/fires.id6de826/{z}/{x}/{y}.png'
+      center: {}
+      bounds: leafletBoundsHelpers.createBoundsFromArray([
+        [-37.50505999800001, 140.999474528]
+        [-28.157019914000017, 159.109219008]
+      ])
 
     getColour = (level) ->
       switch level
@@ -37,4 +42,3 @@ angular.module('fireExplorerApp')
                 'marker-color': getColour(incident.properties.alertLevel)
 
         incidents.addTo map
-        map.fitBounds incidents.getBounds()
