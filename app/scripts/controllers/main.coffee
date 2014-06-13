@@ -8,7 +8,7 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope, $http, leafletData, leafletBoundsHelpers) ->
+  .controller 'MainCtrl', ($scope, $http, leafletBoundsHelpers) ->
     # Config leaflet for mapbox
     angular.extend $scope,
       defaults:
@@ -26,12 +26,11 @@ angular.module('fireExplorerApp')
         when 'Emergency Warning' then '#d30910'
         else '#cccccc' # 'Not Applicable'
 
-    # Get the map so we can work on it rather than through the directive
-    # NOTE Maybe it's better to just ditch the leaflet directive?
-    leafletData.getMap().then (map) ->
-      # Load data
-      $http.get('http://localhost:3000/1.0/incidents').success (data, status) ->
-        incidents = L.geoJson data,
+    # Load data
+    $http.get('http://localhost:3000/1.0/incidents').success (data, status) ->
+      angular.extend $scope,
+        geojson:
+          data: data
           pointToLayer: (incident, latlng) ->
             L.marker latlng,
               title: incident.properties.title
@@ -40,5 +39,3 @@ angular.module('fireExplorerApp')
                 'marker-size': 'large'
                 'marker-symbol': 'fire-station'
                 'marker-color': getColour(incident.properties.alertLevel)
-
-        incidents.addTo map
