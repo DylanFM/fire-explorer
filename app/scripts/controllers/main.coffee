@@ -13,6 +13,7 @@ angular.module('fireExplorerApp')
     angular.extend $scope,
       defaults:
         tileLayer: 'https://{s}.tiles.mapbox.com/v3/fires.id6de826/{z}/{x}/{y}.png'
+        attributionControl: false
       center: {}
       bounds: leafletBoundsHelpers.createBoundsFromArray([
         [-37.50505999800001, 140.999474528]
