@@ -35,7 +35,7 @@ angular.module('fireExplorerApp')
             L.marker latlng,
               title: incident.properties.title
               alt: incident.properties.title
-              icon: L.mapbox.marker.icon
-                'marker-size': 'large'
-                'marker-symbol': 'fire-station'
-                'marker-color': getColour(incident.properties.alertLevel)
+              icon: L.MakiMarkers.icon
+                'size': 'large'
+                'icon': 'fire-station'
+                'color': getColour(incident.properties.alertLevel)
