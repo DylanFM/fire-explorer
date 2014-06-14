@@ -40,3 +40,5 @@ angular.module('fireExplorerApp')
                 'size': 'large'
                 'icon': 'fire-station'
                 'color': getColour(incident.properties.alertLevel)
+          onEachFeature: (incident, layer) ->
+            layer.bindPopup(incident.properties.title)
