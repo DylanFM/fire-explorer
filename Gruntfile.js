@@ -425,8 +425,19 @@ module.exports = function (grunt) {
             dest: '/'
           },
           {
+            src: 'dist/*.html',
+            dest: '/',
+            options: {
+              headers: {
+                "Cache-Control": "max-age=600, public",
+                "Expires": new Date(Date.now() + 600).toUTCString()
+              }
+            },
+          },
+          {
             src: 'dist/images/*',
-            dest: '/images/'
+            dest: '/images/',
+            gzip: true
           },
           {
             src: 'dist/scripts/*',
