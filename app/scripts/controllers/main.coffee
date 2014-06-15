@@ -45,6 +45,8 @@ angular.module('fireExplorerApp')
             layer.bindPopup pu,
               incident: incident.properties
               minWidth: 320
+              closeButton: false
+              className: 'incidentPopup'
 
     # When a popup opens
     $scope.$on 'leafletDirectiveMap.popupopen', (event, leafletEvent) ->

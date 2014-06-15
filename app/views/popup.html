@@ -1,0 +1,23 @@
+<article class="incident">
+  <header>
+    <h1>{{incident.category}}</h1>
+    <h2>{{incident.title}}</h2>
+    <b class="status">{{incident.status}}</b>
+  </header>
+  <div class="time">
+    <b>First seen</b><span class="firstSeen">{{incident.firstSeen}}</span>
+    <br />
+    <b>Last update</b><span class="lastUpdate">{{incident.pubdate}}</span>
+  </div>
+  <div class="location">
+    <h3>Location</h3>
+    <span class="size">{{incident.size}}</span>
+    <p>{{incident.location}}</p>
+    <span class="council">{{incident.councilArea}}</span>
+  </div>
+  <div class="agency">
+    <h3>Responsible agency</h3>
+    <span>Rural Fire Service</span>
+  </div>
+  <a href="{{incident.link}}" title="View on the RFS website" rel="external">View on RFS</a>
+</article>
