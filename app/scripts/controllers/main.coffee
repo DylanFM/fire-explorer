@@ -8,7 +8,7 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope, $http, leafletBoundsHelpers) ->
+  .controller 'MainCtrl', ($scope, $http, $compile, leafletBoundsHelpers) ->
     # Config leaflet for mapbox
     angular.extend $scope,
       defaults:
@@ -41,4 +41,17 @@ angular.module('fireExplorerApp')
                 'icon': 'fire-station'
                 'color': getColour(incident.properties.alertLevel)
           onEachFeature: (incident, layer) ->
-            layer.bindPopup(incident.properties.title)
+            pu = '<div popup/>'
+            layer.bindPopup pu,
+              incident: incident.properties
+              minWidth: 320
+
+    # When a popup opens
+    $scope.$on 'leafletDirectiveMap.popupopen', (event, leafletEvent) ->
+
+      incident = leafletEvent.leafletEvent.popup.options.incident
+
+      newScope = $scope.$new()
+      newScope.incident = incident
+
+      $compile(leafletEvent.leafletEvent.popup._contentNode)(newScope)
