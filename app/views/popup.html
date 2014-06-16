@@ -1,7 +1,9 @@
 <article class="incident">
   <header>
-    <h1>{{incident.category}}</h1>
+    <h1 ng-if="incident.category !== 'Not Applicable'">{{incident.category}}</h1>
     <h2>{{incident.title}}</h2>
+    <b class="type">{{incident.fireType}}</b>
+    <br />
     <b class="status">{{incident.status}}</b>
   </header>
   <div class="time">

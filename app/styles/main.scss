@@ -15,8 +15,6 @@ body, .leaflet-container {
   font-family: franklin-gothic-urw;
   font-weight: 400;
 }
-.leaflet-container {
-}
 
 // Incident popup window
 .incidentPopup {
@@ -58,7 +56,7 @@ body, .leaflet-container {
   h1, h2, h3, p {
     margin: 0;
   }
-  h1, .status {
+  h1, .status, .type {
     text-transform: uppercase;
   }
   h1 {
@@ -66,9 +64,11 @@ body, .leaflet-container {
   }
   h2 {
     margin-bottom: .2em;
+  }
+  h2, .type {
     font-weight: 400;
   }
-  .status {
+  .type, .status {
     font-size: 1.2em;
   }
   h3 {
