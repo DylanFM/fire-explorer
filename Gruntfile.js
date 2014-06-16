@@ -421,18 +421,19 @@ module.exports = function (grunt) {
       dev: {
         upload: [
           {
-            src: 'dist/*',
-            dest: '/'
-          },
-          {
             src: 'dist/*.html',
             dest: '/',
             options: {
               headers: {
-                "Cache-Control": "max-age=600, public",
-                "Expires": new Date(Date.now() + 600).toUTCString()
+                // 10 min cache policy (1000 * 60 * 10)
+                "Cache-Control": "max-age=600000, public",
+                "Expires": new Date(Date.now() + 600000).toUTCString()
               }
-            },
+            }
+          },
+          {
+            src: 'dist/*',
+            dest: '/'
           },
           {
             src: 'dist/images/*',
@@ -449,7 +450,14 @@ module.exports = function (grunt) {
           },
           {
             src: 'dist/views/*',
-            dest: '/views/'
+            dest: '/views/',
+            options: {
+              headers: {
+                // 10 min cache policy (1000 * 60 * 10)
+                "Cache-Control": "max-age=600000, public",
+                "Expires": new Date(Date.now() + 600000).toUTCString()
+              }
+            }
           }
         ]
       }
