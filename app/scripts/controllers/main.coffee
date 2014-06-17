@@ -54,7 +54,7 @@ angular.module('fireExplorerApp')
           onEachFeature: (incident, layer) ->
             pu = '<div popup/>'
             layer.bindPopup pu,
-              incident: incident.properties
+              incident: incident
               minWidth: 320
               closeButton: false
               className: 'incidentPopup'
