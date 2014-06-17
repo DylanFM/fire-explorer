@@ -27,11 +27,18 @@ angular.module('fireExplorerApp')
         when 'Emergency Warning' then '#d30910'
         else '#cccccc' # 'Not Applicable'
 
+    # Returns a style hash for a given incident
+    # http://leafletjs.com/reference.html#path-stroke
+    styleForIncident = (incident) ->
+      # Stroke and fill colours
+      { color: getColour(incident.properties.alertLevel) }
+
     # Load data
     $http.get('http://api.bushfir.es/1.0/incidents').success (data, status) ->
       angular.extend $scope,
         geojson:
           data: data
+          style: styleForIncident
           pointToLayer: (incident, latlng) ->
             L.marker latlng,
               title: incident.properties.title
