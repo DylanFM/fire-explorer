@@ -7,9 +7,10 @@
  # # distanceFrom
 ###
 angular.module('fireExplorerApp')
-  .directive 'distanceFrom', ->
+  .directive 'distanceFrom', ($window) ->
     template: '<span class="distanceFrom"></span>'
     restrict: 'E'
     link: (scope, element, attrs) ->
-      scope.$watch 'location', (val) ->
-        element.text "#{val.coords.latitude},#{val.coords.longitude}"
+      scope.$watch 'point', (point) ->
+        distance = $window.geolib.getDistance scope.location.coords, point
+        element.text "#{distance/1000}km"
