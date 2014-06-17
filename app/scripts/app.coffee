@@ -9,8 +9,9 @@
  # Main module of the application.
 ###
 angular
-  .module('fireExplorerApp', [
-    'ngCookies',
-    'ngSanitize',
+  .module 'fireExplorerApp', [
+    'ngCookies'
+    'ngSanitize'
     'leaflet-directive'
-  ])
+    'angularMoment'
+  ]

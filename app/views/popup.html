@@ -7,14 +7,18 @@
     <b class="status">{{incident.status}}</b>
   </header>
   <div class="time">
-    <b>First seen:</b> <span class="firstSeen">{{incident.firstSeen | date:'EEE d MMM yyyy hh:mm:ss'}}</span>
-    <br />
-    <b>Last update:</b> <span class="lastUpdate">{{incident.pubdate | date:'EEE d MMM yyyy hh:mm:ss'}}</span>
+    <div>
+      <h3>Last update</h3>
+      <time class="lastUpdate" am-time-ago="incident.pubdate" datetime="{{incident.pubdate}}"></time>
+    </div>
+    <div>
+      <h3>First seen</h3>
+      <time class="firstSeen" am-time-ago="incident.firstSeen" datetime="{{incident.firstSeen}}"></time>
+    </div>
   </div>
   <div class="location">
     <h3>Location</h3>
     <p>{{incident.location}}</p>
-    <br />
     <b>Size:</b> <span class="size">{{incident.size}}</span>
     <br />
     <b>Council:</b> <span class="council">{{incident.councilArea}}</span>

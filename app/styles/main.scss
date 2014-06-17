@@ -43,6 +43,9 @@ body, .leaflet-container {
       padding: 1em;
       border-bottom: 1px solid rgb(213,213,211)
     }
+    .time {
+      padding: 0;
+    }
     .agency {
       border: none;
     }
@@ -62,7 +65,7 @@ body, .leaflet-container {
   h1 {
     margin-bottom: .1em;
   }
-  h2 {
+  h2, h3 {
     margin-bottom: .2em;
   }
   h2, .type {
@@ -71,12 +74,26 @@ body, .leaflet-container {
   .type, .status {
     font-size: 1.2em;
   }
-  h3 {
-    margin-bottom: .5em;
-  }
   a[rel=external] {
     position: absolute;
     bottom: 1em;
     right: 1em;
+  }
+  .time {
+    overflow: auto; // Clearfix
+
+    div {
+      display: inline-block;
+      padding: 1em;
+      box-sizing: border-box;
+      text-align: center;
+      border-bottom: none;
+      width: 50%;
+      float: left;
+
+      &:first-child {
+        border-right: 1px solid rgb(213,213,211);
+      }
+    }
   }
 }
