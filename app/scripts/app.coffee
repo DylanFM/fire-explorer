@@ -14,4 +14,5 @@ angular
     'ngSanitize'
     'leaflet-directive'
     'angularMoment'
+    'geolocation'
   ]
