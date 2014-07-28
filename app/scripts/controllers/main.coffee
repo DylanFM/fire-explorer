@@ -20,15 +20,6 @@ angular.module('fireExplorerApp')
         [-28.157019914000017, 159.109219008]
       ])
 
-    # TODO Move to incident - maybe in FireApi or instantiated objects from there
-    getColour = (level) ->
-      switch level
-        when 'Advice' then '#2472e5'
-        when 'Watch and Act' then '#f88225'
-        when 'Emergency Warning' then '#d30910'
-        else '#cccccc' # 'Not Applicable'
-
-
     # Attempt to fetch the user's location
     geolocation.getLocation().then (loc) ->
       $scope.location = loc
@@ -40,7 +31,7 @@ angular.module('fireExplorerApp')
         geojson:
           data: incidents
           style: (incident) ->
-            color: getColour(incident.properties.alertLevel)
+            color: incident.getColour()
           pointToLayer: (incident, latlng) ->
             L.marker latlng,
               title: incident.properties.title
@@ -48,7 +39,7 @@ angular.module('fireExplorerApp')
               icon: L.MakiMarkers.icon
                 'size': 'large'
                 'icon': 'fire-station'
-                'color': getColour(incident.properties.alertLevel)
+                'color': incident.getColour()
           onEachFeature: (incident, layer) ->
             pu = '<div popup/>'
             layer.bindPopup pu,
