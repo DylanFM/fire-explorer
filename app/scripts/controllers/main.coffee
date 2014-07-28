@@ -8,7 +8,7 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope, $http, $compile, leafletBoundsHelpers, geolocation) ->
+  .controller 'MainCtrl', ($scope, $http, $compile, leafletBoundsHelpers, geolocation, FireApi) ->
     # Config leaflet for mapbox
     angular.extend $scope,
       defaults:
@@ -37,11 +37,12 @@ angular.module('fireExplorerApp')
     geolocation.getLocation().then (loc) ->
       $scope.location = loc
 
-    # Load data
-    $http.get('http://api.bushfir.es/1.0/incidents').success (data, status) ->
+    # Work with current incidents
+    FireApi.getCurrentIncidents().then (result) ->
+      incidents = result.data
       angular.extend $scope,
         geojson:
-          data: data
+          data: incidents
           style: styleForIncident
           pointToLayer: (incident, latlng) ->
             L.marker latlng,
