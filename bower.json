@@ -13,7 +13,8 @@
     "angular-moment": "~0.7.1",
     "angularjs-geolocation": "~0.1.1",
     "lodash": "~2.4.1",
-    "geolib": "~2.0.9"
+    "geolib": "~2.0.9",
+    "angular-rx": "~0.0.5"
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",

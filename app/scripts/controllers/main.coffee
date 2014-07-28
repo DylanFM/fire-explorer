@@ -20,6 +20,7 @@ angular.module('fireExplorerApp')
         [-28.157019914000017, 159.109219008]
       ])
 
+    # TODO Move to incident - maybe in FireApi or instantiated objects from there
     getColour = (level) ->
       switch level
         when 'Advice' then '#2472e5'
@@ -27,23 +28,18 @@ angular.module('fireExplorerApp')
         when 'Emergency Warning' then '#d30910'
         else '#cccccc' # 'Not Applicable'
 
-    # Returns a style hash for a given incident
-    # http://leafletjs.com/reference.html#path-stroke
-    styleForIncident = (incident) ->
-      # Stroke and fill colours
-      { color: getColour(incident.properties.alertLevel) }
 
     # Attempt to fetch the user's location
     geolocation.getLocation().then (loc) ->
       $scope.location = loc
 
     # Work with current incidents
-    FireApi.getCurrentIncidents().then (result) ->
-      incidents = result.data
+    FireApi.getCurrentIncidents().subscribe (incidents) ->
       angular.extend $scope,
         geojson:
           data: incidents
-          style: styleForIncident
+          style: (incident) ->
+            color: getColour(incident.properties.alertLevel)
           pointToLayer: (incident, latlng) ->
             L.marker latlng,
               title: incident.properties.title

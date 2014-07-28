@@ -15,4 +15,5 @@ angular
     'leaflet-directive'
     'angularMoment'
     'geolocation'
+    'rx'
   ]

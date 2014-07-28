@@ -8,6 +8,11 @@
  # Service in the fireExplorerApp.
 ###
 angular.module('fireExplorerApp')
-  .service 'FireApi', ($http) ->
+  .service 'FireApi', ($http, rx) ->
     class FireApi
-      @getCurrentIncidents: -> $http.get('http://api.bushfir.es/1.0/incidents')
+      @getCurrentIncidents: ->
+        deferred = $http.get('http://api.bushfir.es/1.0/incidents')
+
+        rx.Observable
+          .fromPromise(deferred)
+          .map (response) -> response.data
