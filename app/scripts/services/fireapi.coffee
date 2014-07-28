@@ -10,9 +10,10 @@
 angular.module('fireExplorerApp')
   .service 'FireApi', ($http, rx) ->
     class FireApi
-      @getCurrentIncidents: ->
-        deferred = $http.get('http://api.bushfir.es/1.0/incidents')
+      constructor: ->
+        @fetchIncidents()
 
-        rx.Observable
-          .fromPromise(deferred)
+      fetchIncidents: ->
+        @incidents = rx.Observable
+          .fromPromise $http.get('http://api.bushfir.es/1.0/incidents')
           .map (response) -> response.data

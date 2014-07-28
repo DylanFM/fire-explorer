@@ -34,7 +34,8 @@ angular.module('fireExplorerApp')
       $scope.location = loc
 
     # Work with current incidents
-    FireApi.getCurrentIncidents().subscribe (incidents) ->
+    api = new FireApi
+    api.incidents.subscribe (incidents) ->
       angular.extend $scope,
         geojson:
           data: incidents
