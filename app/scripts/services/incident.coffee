@@ -8,10 +8,11 @@
  # Service in the fireExplorerApp.
 ###
 angular.module('fireExplorerApp')
-  .service 'Incident', ->
+  .service 'Incident', (rx) ->
     class Incident
       constructor: (data) ->
         angular.extend @, data
+        @setPoints()
 
       getColour: ->
         switch @properties.alertLevel
@@ -19,3 +20,12 @@ angular.module('fireExplorerApp')
           when 'Watch and Act' then '#f88225'
           when 'Emergency Warning' then '#d30910'
           else '#cccccc' # 'Not Applicable'
+
+      # Look in @geometry.geometries for Points
+      setPoints: ->
+        rx.Observable
+          .fromArray @geometry.geometries
+          .filter (g) -> g.type is 'Point'
+          .map (p) -> p.coordinates
+          .toArray()
+          .subscribe (points) => @points = points

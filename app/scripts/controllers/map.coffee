@@ -8,7 +8,7 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MapCtrl', ($scope, $compile, leafletBoundsHelpers) ->
+  .controller 'MapCtrl', ($scope, $compile, leafletData, leafletBoundsHelpers) ->
 
     # Setup the map
     angular.extend $scope,
@@ -22,25 +22,30 @@ angular.module('fireExplorerApp')
         [-28.157019914000017, 159.109219008]
       ])
 
-      geojson:
-        data: $scope.incidents
-        style: (incident) ->
-          color: incident.getColour()
-        pointToLayer: (incident, latlng) ->
-          L.marker latlng,
-            title: incident.properties.title
-            alt: incident.properties.title
-            icon: L.MakiMarkers.icon
-              'size': 'large'
-              'icon': 'fire-station'
-              'color': incident.getColour()
-        onEachFeature: (incident, layer) ->
-          pu = '<div popup/>'
-          layer.bindPopup pu,
-            incident: incident
-            minWidth: 320
-            closeButton: false
-            className: 'incidentPopup'
+    # Work with layers manually rather than through directive
+    leafletData.getMap().then (map) ->
+
+      # Iterate through the incidents
+      for incident in $scope.incidents
+        point = incident.points[0] # NOTE just using first point, assuming it is there too
+        latlng = L.latLng point[1], point[0]
+        # Add the incident marker with popup
+        marker = L.marker latlng,
+          title: incident.properties.title
+          alt: incident.properties.title
+          icon: L.MakiMarkers.icon
+            'size': 'large'
+            'icon': 'fire-station'
+            'color': incident.getColour()
+
+        pu = '<div popup/>'
+        marker.bindPopup pu,
+          incident: incident
+          minWidth: 320
+          closeButton: false
+          className: 'incidentPopup'
+        # Add the marker to the map
+        marker.addTo map
 
     # When a popup opens
     $scope.$on 'leafletDirectiveMap.popupopen', (event, leafletEvent) ->
