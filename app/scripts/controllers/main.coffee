@@ -15,9 +15,9 @@ angular.module('fireExplorerApp')
     # Initialise the incidents collection
     $scope.incidents = []
 
-    fireApi = new FireApi
+    $scope.fireApi = new FireApi
     # Subscribe to the incidents stream
-    fireApi.incidents
+    $scope.fireApi.incidents
       # Transform into a collection
       .toArray()
       .subscribe (incidents) ->
