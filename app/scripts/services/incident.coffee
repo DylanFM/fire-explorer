@@ -8,7 +8,7 @@
  # Service in the fireExplorerApp.
 ###
 angular.module('fireExplorerApp')
-  .service 'Incident', (rx) ->
+  .service 'Incident', ($window, rx, geolocation) ->
     class Incident
       constructor: (data) ->
         angular.extend @, data
@@ -28,4 +28,16 @@ angular.module('fireExplorerApp')
           .filter (g) -> g.type is 'Point'
           .map (p) -> p.coordinates
           .toArray()
-          .subscribe (points) => @points = points
+          .subscribe (points) =>
+            @points = points
+            @lat    = points[0][1]
+            @lng    = points[0][0]
+            @setDistanceFromUser()
+
+      # Sets the distance from the user in metres
+      setDistanceFromUser: ->
+        @distanceFromUser = null
+        return unless @lat and @lng
+
+        geolocation.getLocation().then (loc) =>
+          @distanceFromUser = $window.geolib.getDistance loc.coords, latitude: @lat, longitude: @lng
