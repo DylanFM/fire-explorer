@@ -1,5 +1,7 @@
 <article class="incidentMini" id="incident_{{incident.id}}">
-  <abbr class="alertLevel" title="Alert level: {{incident.properties.alertLevel}}">{{incident.properties.alertLevel | simplifyAlertLevel}}</abbr>
-  <h1>{{incident.properties.title}}</h1>
-  <span class="distanceFrom">{{incident.distanceFromUser | km}}</span>
+  <a href="/incidents/{{incident.id}}" title="View incident details">
+    <abbr class="alertLevel" title="Alert level: {{incident.properties.alertLevel}}">{{incident.properties.alertLevel | simplifyAlertLevel}}</abbr>
+    <h1>{{incident.properties.title}}</h1>
+    <span class="distanceFrom">{{incident.distanceFromUser | km}}</span>
+  </a>
 </article>

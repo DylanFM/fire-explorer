@@ -1,12 +1,15 @@
 // Small incident details (list item, future popup)
 .incidentMini {
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
+  a {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 
-  > * {
-    box-sizing: border-box;
-    padding: .5em 1em;
+    > * {
+      box-sizing: border-box;
+      padding: .5em 1em;
+    }
   }
   abbr {
     border-bottom: none;
