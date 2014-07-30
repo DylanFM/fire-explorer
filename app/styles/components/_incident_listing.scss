@@ -1,0 +1,11 @@
+// List of incidents
+.incidentListing {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgb(213,213,211);
+
+  > li {
+    border-top: 1px solid rgb(213,213,211);
+  }
+}

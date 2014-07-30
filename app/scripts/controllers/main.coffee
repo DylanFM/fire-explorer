@@ -8,63 +8,18 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope, $http, $compile, leafletBoundsHelpers, geolocation) ->
-    # Config leaflet for mapbox
-    angular.extend $scope,
-      defaults:
-        tileLayer: 'https://{s}.tiles.mapbox.com/v3/fires.id6de826/{z}/{x}/{y}.png'
-        attributionControl: false
-      center: {}
-      bounds: leafletBoundsHelpers.createBoundsFromArray([
-        [-37.50505999800001, 140.999474528]
-        [-28.157019914000017, 159.109219008]
-      ])
+  .controller 'MainCtrl', ($scope, $filter, userLocation, FireApi) ->
 
-    getColour = (level) ->
-      switch level
-        when 'Advice' then '#2472e5'
-        when 'Watch and Act' then '#f88225'
-        when 'Emergency Warning' then '#d30910'
-        else '#cccccc' # 'Not Applicable'
+    $scope.location = userLocation
 
-    # Returns a style hash for a given incident
-    # http://leafletjs.com/reference.html#path-stroke
-    styleForIncident = (incident) ->
-      # Stroke and fill colours
-      { color: getColour(incident.properties.alertLevel) }
+    # Initialise the incidents collection
+    $scope.incidents = []
 
-    # Attempt to fetch the user's location
-    geolocation.getLocation().then (loc) ->
-      $scope.location = loc
-
-    # Load data
-    $http.get('http://api.bushfir.es/1.0/incidents').success (data, status) ->
-      angular.extend $scope,
-        geojson:
-          data: data
-          style: styleForIncident
-          pointToLayer: (incident, latlng) ->
-            L.marker latlng,
-              title: incident.properties.title
-              alt: incident.properties.title
-              icon: L.MakiMarkers.icon
-                'size': 'large'
-                'icon': 'fire-station'
-                'color': getColour(incident.properties.alertLevel)
-          onEachFeature: (incident, layer) ->
-            pu = '<div popup/>'
-            layer.bindPopup pu,
-              incident: incident
-              minWidth: 320
-              closeButton: false
-              className: 'incidentPopup'
-
-    # When a popup opens
-    $scope.$on 'leafletDirectiveMap.popupopen', (event, leafletEvent) ->
-
-      incident = leafletEvent.leafletEvent.popup.options.incident
-
-      newScope = $scope.$new()
-      newScope.incident = incident
-
-      $compile(leafletEvent.leafletEvent.popup._contentNode)(newScope)
+    $scope.fireApi = new FireApi
+    # Subscribe to the incidents stream
+    $scope.fireApi.incidents
+      # Transform into a collection
+      .toArray()
+      .subscribe (incidents) ->
+        # Sort them and store on scope
+        $scope.incidents = $filter('orderBy') incidents, 'distanceFromUser'

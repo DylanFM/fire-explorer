@@ -1,0 +1,41 @@
+// Small incident details (list item, future popup)
+.incidentMini {
+  a {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    > * {
+      box-sizing: border-box;
+      padding: .5em 1em;
+    }
+    &:active, &:hover, &:focus {
+      background: rgba(255,255,255,0.9);
+    }
+  }
+  abbr {
+    border-bottom: none;
+  }
+  abbr, span {
+    display: inline-block;
+    text-align: center;
+  }
+  .alertLevel {
+    width: 4em;
+  }
+  h1, h2 {
+    font-size: 1em;
+    margin: 0;
+  }
+  h2 {
+    font-weight: normal;
+  }
+  div {
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .distanceFrom {
+    width: 6em;
+  }
+}

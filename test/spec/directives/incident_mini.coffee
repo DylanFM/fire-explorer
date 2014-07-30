@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Directive: distanceFrom', ->
+describe 'Directive: incidentMini', ->
 
   # load the directive's module
   beforeEach module 'fireExplorerApp'
@@ -11,6 +11,6 @@ describe 'Directive: distanceFrom', ->
     scope = $rootScope.$new()
 
   it 'should make hidden element visible', inject ($compile) ->
-    element = angular.element '<distance-from></distance-from>'
+    element = angular.element '<incident-mini></incident-mini>'
     element = $compile(element) scope
-    expect(element.text()).toBe 'this is the distanceFrom directive'
+    expect(element.text()).toBe 'this is the incidentMini directive'

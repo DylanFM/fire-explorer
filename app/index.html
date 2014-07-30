@@ -41,7 +41,18 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+    <div ng-controller="MainCtrl">
+      <header class="global">
+        <h1>Fire explorer</h1>
+
+        <nav>
+          <a href="/">List</a>
+          <a href="/map">Map</a>
+        </nav>
+      </header>
+
+      <div ng-view></div>
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -52,6 +63,7 @@
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/leaflet-dist/leaflet.js"></script>
     <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
@@ -61,14 +73,24 @@
     <script src="bower_components/angularjs-geolocation/src/geolocation.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/geolib/dist/geolib.js"></script>
+    <script src="bower_components/Rx/dist/rx.all.js"></script>
+    <script src="bower_components/angular-rx/rx.angular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/detail.js"></script>
+        <script src="scripts/controllers/list.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/map.js"></script>
+        <script src="scripts/directives/incident_mini.js"></script>
         <script src="scripts/directives/popup.js"></script>
-        <script src="scripts/directives/distancefrom.js"></script>
+        <script src="scripts/services/fireapi.js"></script>
+        <script src="scripts/services/incident.js"></script>
+        <script src="scripts/services/user_location.js"></script>
+        <script src="scripts/filters/simplifyalertlevel.js"></script>
+        <script src="scripts/filters/km.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -1,0 +1,16 @@
+header.global {
+  text-align: center;
+  position: relative;
+
+  h1 {
+    font-size: 1em;
+  }
+  h1, nav {
+    display: inline-block;
+  }
+  nav {
+    position: absolute;
+    right: 1em;
+    top: .5em;
+  }
+}
