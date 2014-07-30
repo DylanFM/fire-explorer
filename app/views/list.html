@@ -1,8 +1,8 @@
 <a href="/map">Show map</a>
 
-<ul>
+<ul class="incidentListing">
   <li ng-repeat="incident in incidents">
-    <article id="incident_{{incident.id}}">
+    <article class="incidentMini" id="incident_{{incident.id}}">
       <span class="alertLevel">{{incident.properties.alertLevel}}</span>
       <h1>{{incident.properties.title}}</h1>
       <span class="distanceFrom">{{incident.distanceFromUser/1000}}km</span>
