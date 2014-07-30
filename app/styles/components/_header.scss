@@ -1,0 +1,13 @@
+header.global {
+  text-align: center;
+
+  h1 {
+    font-size: 1em;
+  }
+  h1, nav {
+    display: inline-block;
+  }
+  nav {
+    float: right;
+  }
+}
