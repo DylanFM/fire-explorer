@@ -5,7 +5,7 @@
     <article id="incident_{{incident.id}}">
       <span class="alertLevel">{{incident.properties.alertLevel}}</span>
       <h1>{{incident.properties.title}}</h1>
-      <span class="distanceFrom">{{incident.distanceFromUser}}</span>
+      <span class="distanceFrom">{{incident.distanceFromUser/1000}}km</span>
     </article>
   </li>
 </ul>

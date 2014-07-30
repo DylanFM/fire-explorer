@@ -8,17 +8,18 @@
  # Controller of the fireExplorerApp
 ###
 angular.module('fireExplorerApp')
-  .controller 'MainCtrl', ($scope, geolocation, FireApi) ->
+  .controller 'MainCtrl', ($scope, $filter, userLocation, FireApi) ->
 
-    # Attempt to fetch the user's location
-    geolocation.getLocation().then (loc) ->
-      $scope.location = loc
+    $scope.location = userLocation
 
     # Initialise the incidents collection
     $scope.incidents = []
 
     fireApi = new FireApi
     # Subscribe to the incidents stream
-    fireApi.incidents.subscribe (incident) ->
-      # When there's a new incident, append it to the list
-      $scope.incidents.push incident
+    fireApi.incidents
+      # Transform into a collection
+      .toArray()
+      .subscribe (incidents) ->
+        # Sort them and store on scope
+        $scope.incidents = $filter('orderBy') incidents, 'distanceFromUser'
