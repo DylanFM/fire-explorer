@@ -1,5 +1,6 @@
 header.global {
   text-align: center;
+  position: relative;
 
   h1 {
     font-size: 1em;
@@ -8,6 +9,8 @@ header.global {
     display: inline-block;
   }
   nav {
-    float: right;
+    position: absolute;
+    right: 1em;
+    top: .5em;
   }
 }
