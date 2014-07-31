@@ -21,3 +21,16 @@ body, .leaflet-container {
   font-family: franklin-gothic-urw;
   font-weight: 400;
 }
+
+h1, h2, h3, b {
+  font-weight: 700;
+}
+
+a {
+  &:link, &:visited {
+    color: rgb(36,40,25);
+  }
+  &:active, &:hover, &:focus {
+    color: #000;
+  }
+}
