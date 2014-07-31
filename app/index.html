@@ -44,8 +44,8 @@
         <h1>Fire explorer</h1>
 
         <nav>
-          <a href="/">List</a>
-          <a href="/map">Map</a>
+          <a href="/" ng-if="$route.current.activetab != 'list'">List</a>
+          <a href="/map" ng-if="$route.current.activetab != 'map'">Map</a>
         </nav>
       </header>
 

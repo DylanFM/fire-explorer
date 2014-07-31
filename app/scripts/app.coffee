@@ -22,10 +22,13 @@ angular
       .when '/map',
         templateUrl: '/views/map.html'
         controller: 'MapCtrl'
+        activetab: 'map'
       .when '/incidents/:incidentId',
         templateUrl: '/views/detail.html'
         controller: 'DetailCtrl'
+        activetab: 'detail'
       .otherwise
         templateUrl: '/views/list.html'
         controller: 'ListCtrl'
+        activetab: 'list'
     $locationProvider.html5Mode(true)
