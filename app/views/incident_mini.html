@@ -7,6 +7,10 @@
         {{incident.properties.fireType}},
         {{incident.properties.status}}
       </h2>
+      <span class="lastUpdate">
+        Last update
+        <time am-time-ago="incident.properties.pubdate" datetime="{{incident.properties.pubdate}}"></time>
+      </span>
     </div>
     <span class="distanceFrom">{{incident.distanceFromUser | km}}</span>
   </a>
