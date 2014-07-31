@@ -6,23 +6,34 @@
     align-items: center;
     text-decoration: none;
 
-    > * {
-      box-sizing: border-box;
-      padding: .5em 1em;
+    > {
+      * {
+        box-sizing: border-box;
+        padding: .5rem 1rem;
+      }
+      :first-child, :last-child {
+        display: inline-block;
+        text-align: center;
+      }
+      :first-child {
+        width: 4rem;
+      }
+      :last-child {
+        width: 6rem;
+      }
     }
     &:active, &:hover, &:focus {
       background: rgba(255,255,255,0.9);
     }
   }
+  div {
+    -webkit-flex: 1;
+    flex: 1;
+  }
   abbr {
     border-bottom: none;
-  }
-  abbr, span {
-    display: inline-block;
-    text-align: center;
-  }
-  .alertLevel {
-    width: 4em;
+    font-size: 1.5em;
+    font-weight: 700;
   }
   h1, h2 {
     font-size: 1em;
@@ -31,11 +42,7 @@
   h2 {
     font-weight: normal;
   }
-  div {
-    -webkit-flex: 1;
-    flex: 1;
-  }
   .distanceFrom {
-    width: 6em;
+    display: block;
   }
 }
