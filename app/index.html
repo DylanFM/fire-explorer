@@ -43,10 +43,9 @@
       <header class="global">
         <h1>Fire explorer</h1>
 
-        <nav>
-          <a href="/" ng-if="$route.current.activetab != 'list'">List</a>
-          <a href="/map" ng-if="$route.current.activetab != 'map'">Map</a>
-        </nav>
+        <a class="list-link" href="/" ng-if="$route.current.activetab == 'map'">List</a>
+        <a class="map-link" href="/map" ng-if="$route.current.activetab == 'list'">Map</a>
+        <a class="back-link" href="javascript:history.back()" ng-if="$route.current.activetab == 'detail'">Back</a>
       </header>
 
       <div ng-view></div>
