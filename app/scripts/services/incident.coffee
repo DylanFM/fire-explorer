@@ -8,7 +8,7 @@
  # Service in the fireExplorerApp.
 ###
 angular.module('fireExplorerApp')
-  .service 'Incident', ($window, rx, userLocation) ->
+  .service 'Incident', ($window, userLocation) ->
     class Incident
       constructor: (data) ->
         angular.extend @, data
@@ -23,7 +23,7 @@ angular.module('fireExplorerApp')
 
       # Look in @geometry.geometries for Points
       setPoints: ->
-        rx.Observable
+        $window.Rx.Observable
           .fromArray @geometry.geometries
           .filter (g) -> g.type is 'Point'
           .map (p) -> p.coordinates
