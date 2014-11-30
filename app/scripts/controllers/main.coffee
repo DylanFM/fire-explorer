@@ -28,4 +28,6 @@ angular.module('fireExplorerApp')
       .toArray()
       .subscribe (incidents) ->
         # Sort them and store on scope
-        $scope.incidents = $filter('orderBy') incidents, 'distanceFromUser'
+        $scope.incidents = $filter('orderBy') incidents, (incident) ->
+          incident.properties.lastSeen
+        , true # Reverse sort
