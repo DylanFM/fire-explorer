@@ -34,6 +34,13 @@ angular.module('fireExplorerApp')
             @lng    = points[0][0]
             @setDistanceFromUser()
 
+      # Returns any (multi)polygon geometries
+      getPolygons: ->
+        $window.Rx.Observable
+          .fromArray @geometry.geometries
+          .filter (g) -> g.type is 'MultiPolygon'
+          .toArray()
+
       # Sets the distance from the user in metres
       setDistanceFromUser: ->
         return unless @lat and @lng and userLocation?.coords?

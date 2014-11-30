@@ -12,7 +12,6 @@ angular.module('fireExplorerApp')
 
     # Setup the map
     angular.extend $scope,
-
       defaults:
         tileLayer: 'https://{s}.tiles.mapbox.com/v3/fires.id6de826/{z}/{x}/{y}.png'
         attributionControl: false
@@ -29,6 +28,7 @@ angular.module('fireExplorerApp')
       for incident in $scope.incidents
         point = incident.points[0] # NOTE just using first point, assuming it is there too
         latlng = L.latLng point[1], point[0]
+
         # Add the incident marker with popup
         marker = L.marker latlng,
           title: incident.properties.title
@@ -38,14 +38,25 @@ angular.module('fireExplorerApp')
             'icon': 'fire-station'
             'color': incident.getColour()
 
+        # Add any multi-polygons
+        polyLayer = L.geoJson()
+        incident.getPolygons().subscribe (polygons) ->
+          return unless polygons.length
+          polyLayer.addData(polygon) for polygon in polygons
+
+        # Create a group for these items
+        group = L.featureGroup [marker, polyLayer]
+
+        # Setup popup
         pu = '<div popup/>'
-        marker.bindPopup pu,
+        group.bindPopup pu,
           incident: incident
           minWidth: 320
           closeButton: false
           className: 'incidentPopup'
-        # Add the marker to the map
-        marker.addTo map
+
+        # Add group to map
+        group.addTo map
 
     # When a popup opens
     $scope.$on 'leafletDirectiveMap.popupopen', (event, leafletEvent) ->
