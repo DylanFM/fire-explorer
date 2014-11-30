@@ -12,6 +12,6 @@
         <time am-time-ago="incident.properties.pubdate" datetime="{{incident.properties.pubdate}}"></time>
       </span>
     </div>
-    <span class="distanceFrom">{{incident.distanceFromUser | km}}</span>
+    <span class="distanceFrom"><span ng-if="incident.distanceFromUser">{{incident.distanceFromUser | km}}</span></span>
   </a>
 </article>

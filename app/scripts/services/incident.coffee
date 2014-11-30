@@ -36,7 +36,6 @@ angular.module('fireExplorerApp')
 
       # Sets the distance from the user in metres
       setDistanceFromUser: ->
-        @distanceFromUser = null
         return unless @lat and @lng and userLocation?.coords?
 
         @distanceFromUser = $window.geolib.getDistance userLocation.coords, latitude: @lat, longitude: @lng
