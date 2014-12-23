@@ -2,10 +2,12 @@
 // endbower
 
 @import "components/header";
+@import "components/alert_level";
 @import "components/incident_detail";
 @import "components/incident_listing";
 @import "components/incident_mini";
 @import "components/incident_popup";
+@import "components/report";
 
 .browsehappy {
   margin: 0.2em 0;

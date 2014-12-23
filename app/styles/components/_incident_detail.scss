@@ -1,48 +1,53 @@
 .incidentDetail {
   position: relative;
 
-  div, header {
-    padding: 1em;
+  > div, header {
+    padding: 1rem;
     border-bottom: 1px solid rgb(213,213,211)
   }
   .time {
     padding: 0;
   }
-  .agency {
+  .location {
+    position: relative;
+  }
+  .reports {
     border: none;
+
+    p {
+      margin: .7rem 0;
+    }
   }
   header {
     text-align: center;
+
+    h1, .status, .type {
+      text-transform: uppercase;
+    }
   }
   h1, h2, h3, p {
     margin: 0;
   }
-  h1, .status, .type {
-    text-transform: uppercase;
-  }
   h1 {
-    margin-bottom: .1em;
+    margin-bottom: .1rem;
   }
   h2, h3 {
-    margin-bottom: .2em;
+    margin-bottom: .2rem;
   }
   h2, .type {
     font-weight: 400;
   }
   .type, .status {
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
   a[rel=external] {
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
   }
   .time {
     overflow: auto; // Clearfix
 
     div {
       display: inline-block;
-      padding: 1em;
+      padding: 1rem;
       box-sizing: border-box;
       text-align: center;
       border-bottom: none;
@@ -52,6 +57,14 @@
       &:first-child {
         border-right: 1px solid rgb(213,213,211);
       }
+    }
+  }
+  // Report listing
+  .reports {
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
   }
 }

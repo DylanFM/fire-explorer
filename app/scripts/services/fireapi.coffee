@@ -10,8 +10,8 @@
 angular.module('fireExplorerApp')
   .service 'FireApi', ($http, $window, Incident) ->
     class FireApi
-      # baseUrl: 'http://api.bushfir.es/1.0'
-      baseUrl: 'http://localhost:8000'
+      baseUrl: 'http://api.bushfir.es/1.0'
+      # baseUrl: 'http://localhost:8000'
 
       constructor: ->
         @fetchIncidents()

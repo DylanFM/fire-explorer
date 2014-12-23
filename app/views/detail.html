@@ -23,19 +23,27 @@
     <b>Size:</b> <span class="size">{{incident.properties.size}}</span>
     <br />
     <b>Council:</b> <span class="council">{{incident.properties.councilArea}}</span>
+    <br />
+    <b>Responsible agency:</b> <span class="agency">{{incident.properties.responsibleAgency}}</span>
+    <br />
+    <a href="{{incident.properties.link}}" title="View on the RFS website" rel="external">View on RFS</a>
   </div>
-  <div class="agency">
-    <h3>Responsible agency</h3>
-    <span>{{incident.properties.responsibleAgency}}</span>
-  </div>
-  <div class="reports">
+  <div class="reports" ng-if="reports.length">
     <h3>Reports</h3>
-    <p>Number of reports: {{reports.length}}</p>
+    <p>
+      {{reports.length}} updates recorded since the incident was first seen 
+      <time class="firstSeen" am-time-ago="incident.properties.firstSeen" datetime="{{incident.properties.firstSeen}}"></time>.
+    </p>
     <ol>
       <li ng-repeat="report in reports">
-        <time class="publishedAt" datetime="{{report.properties.pubdate}}">{{report.properties.pubdate | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</time>
+        <article id="report_{{report.id}}" class="report">
+          <abbr class="alertLevel" title="Alert level: {{incident.properties.alertLevel}}">{{report.properties.alertLevel | simplifyAlertLevel}}</abbr>
+          <div>
+            <h1>{{report.properties.status}}</h1>
+            <h2><time class="publishedAt" datetime="{{report.properties.pubdate}}">{{report.properties.pubdate | amDateFormat:'ddd, MMM Do YYYY HH:mm:ss ZZ'}}</time></h2>
+          </div>
+        </article>
       </li>
     </ol>
   </div>
-  <a href="{{incident.properties.link}}" title="View on the RFS website" rel="external">View on RFS</a>
 </article>

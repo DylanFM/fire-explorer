@@ -1,0 +1,36 @@
+.report {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  > {
+    * {
+      box-sizing: border-box;
+      padding: .7rem 1rem;
+    }
+    :first-child, :last-child {
+      display: inline-block;
+    }
+    :first-child {
+      width: 4rem;
+      text-align: center;
+    }
+    :last-child {
+      width: 14rem;
+    }
+  }
+  div {
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  h1 {
+    font-size: 1rem;
+    margin-bottom: .2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-weight: normal;
+    font-size: .8rem;
+  }
+}

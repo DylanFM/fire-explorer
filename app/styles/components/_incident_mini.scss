@@ -30,17 +30,12 @@
     -webkit-flex: 1;
     flex: 1;
   }
-  abbr {
-    border-bottom: none;
-    font-size: 1.5em;
-    font-weight: 700;
-  }
   h1, h2 {
-    font-size: 1em;
+    font-size: 1rem;
     margin: 0;
   }
   h1 {
-    margin-bottom: .2em;
+    margin-bottom: .2rem;
     font-weight: 400;
   }
   h2 {
@@ -48,6 +43,6 @@
     text-transform: uppercase;
   }
   h2, .lastUpdate {
-    font-size: .8em;
+    font-size: .8rem;
   }
 }
