@@ -31,4 +31,3 @@ angular
         templateUrl: '/views/list.html'
         controller: 'ListCtrl'
         activetab: 'list'
-    $locationProvider.html5Mode(true)
