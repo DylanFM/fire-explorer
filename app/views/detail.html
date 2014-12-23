@@ -28,5 +28,14 @@
     <h3>Responsible agency</h3>
     <span>{{incident.properties.responsibleAgency}}</span>
   </div>
+  <div class="reports">
+    <h3>Reports</h3>
+    <p>Number of reports: {{reports.length}}</p>
+    <ol>
+      <li ng-repeat="report in reports">
+        <time class="publishedAt" datetime="{{report.properties.pubdate}}">{{report.properties.pubdate | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</time>
+      </li>
+    </ol>
+  </div>
   <a href="{{incident.properties.link}}" title="View on the RFS website" rel="external">View on RFS</a>
 </article>
