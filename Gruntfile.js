@@ -404,7 +404,7 @@ module.exports = function (grunt) {
           "Cache-Control": "max-age=630720000, public",
           "Expires": new Date(Date.now() + 63072000000).toUTCString()
         },
-        gzip: true
+        gzip: false //true
       },
       dev: {
         upload: [
@@ -426,7 +426,7 @@ module.exports = function (grunt) {
           {
             src: 'dist/images/*',
             dest: '/images/',
-            gzip: true
+            gzip: false //true
           },
           {
             src: 'dist/scripts/*',
