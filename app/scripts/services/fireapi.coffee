@@ -19,7 +19,7 @@ angular.module('fireExplorerApp')
       fetchIncidents: ->
         # Make a stream for this API request
         @incidents = $window.Rx.Observable
-          .fromPromise $http.get("#{@baseUrl}/incidents")
+          .fromPromise $http.get("#{@baseUrl}/incidents/current")
           .flatMap (response) ->
             # Construct a stream consisting of the array of incidents
             $window.Rx.Observable
