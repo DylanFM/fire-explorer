@@ -21,30 +21,29 @@ angular.module('fireExplorerApp')
           when 'Emergency Warning' then '#d30910'
           else '#cccccc' # 'Not Applicable'
 
+      # Avoid issues where sometimes we have a collection and sometimes a single geometry
+      getGeometries: ->
+        switch @geometry.type
+          when 'GeometryCollection'
+            $window.Rx.Observable.fromArray @geometry.geometries
+          else
+            $window.Rx.Observable.fromArray [@geometry]
+
       # Look in @geometry.geometries for Points
       setPoints: ->
-        # If we're working on a geometry collection
-        if @geometry.geometries? and _.isArray(@geometry.geometries)
-          $window.Rx.Observable.fromArray(@geometry.geometries)
-            .filter (g) -> g.type is 'Point'
-            .map (p) -> p.coordinates
-            .toArray()
-            .subscribe (points) => @addPoints(points)
-        else
-          # There's just a point - no collection here
-          if @geometry.type is 'Point'
-            @addPoints [@geometry.coordinates]
-
-      addPoints: (points) ->
-        @points = points
-        @lat    = points[0][1]
-        @lng    = points[0][0]
-        @setDistanceFromUser()
+        @getGeometries()
+          .filter (g) -> g.type is 'Point'
+          .map (p) -> p.coordinates
+          .toArray()
+          .subscribe (points) =>
+            @points = points
+            @lat    = points[0][1]
+            @lng    = points[0][0]
+            @setDistanceFromUser()
 
       # Returns any (multi)polygon geometries
       getPolygons: ->
-        $window.Rx.Observable
-          .fromArray @geometry.geometries
+        @getGeometries()
           .filter (g) -> g.type is 'MultiPolygon'
           .toArray()
 
