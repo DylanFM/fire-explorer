@@ -23,16 +23,23 @@ angular.module('fireExplorerApp')
 
       # Look in @geometry.geometries for Points
       setPoints: ->
-        $window.Rx.Observable
-          .fromArray @geometry.geometries
-          .filter (g) -> g.type is 'Point'
-          .map (p) -> p.coordinates
-          .toArray()
-          .subscribe (points) =>
-            @points = points
-            @lat    = points[0][1]
-            @lng    = points[0][0]
-            @setDistanceFromUser()
+        # If we're working on a geometry collection
+        if @geometry.geometries? and _.isArray(@geometry.geometries)
+          $window.Rx.Observable.fromArray(@geometry.geometries)
+            .filter (g) -> g.type is 'Point'
+            .map (p) -> p.coordinates
+            .toArray()
+            .subscribe (points) => @addPoints(points)
+        else
+          # There's just a point - no collection here
+          if @geometry.type is 'Point'
+            @addPoints [@geometry.coordinates]
+
+      addPoints: (points) ->
+        @points = points
+        @lat    = points[0][1]
+        @lng    = points[0][0]
+        @setDistanceFromUser()
 
       # Returns any (multi)polygon geometries
       getPolygons: ->
