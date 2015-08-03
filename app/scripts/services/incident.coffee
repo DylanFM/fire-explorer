@@ -36,6 +36,7 @@ angular.module('fireExplorerApp')
           .map (p) -> p.coordinates
           .toArray()
           .subscribe (points) =>
+            return unless points?.length
             @points = points
             @lat    = points[0][1]
             @lng    = points[0][0]
@@ -44,7 +45,7 @@ angular.module('fireExplorerApp')
       # Returns any (multi)polygon geometries
       getPolygons: ->
         @getGeometries()
-          .filter (g) -> g.type is 'MultiPolygon'
+          .filter (g) -> g.type is 'MultiPolygon' or g.type is 'Polygon'
           .toArray()
 
       # Sets the distance from the user in metres

@@ -26,17 +26,19 @@ angular.module('fireExplorerApp')
 
       # Iterate through the incidents
       for incident in $scope.incidents
-        point = incident.points[0] # NOTE just using first point, assuming it is there too
-        latlng = L.latLng point[1], point[0]
+        # We may have a point to add a marker to
+        if incident.points?.length
+          point = incident.points[0] # NOTE just using first point, assuming it is there too
+          latlng = L.latLng point[1], point[0]
 
-        # Add the incident marker with popup
-        marker = L.marker latlng,
-          title: incident.properties.title
-          alt: incident.properties.title
-          icon: L.MakiMarkers.icon
-            'size': 'large'
-            'icon': 'fire-station'
-            'color': incident.getColour()
+          # Add the incident marker with popup
+          marker = L.marker latlng,
+            title: incident.properties.title
+            alt: incident.properties.title
+            icon: L.MakiMarkers.icon
+              'size': 'large'
+              'icon': 'fire-station'
+              'color': incident.getColour()
 
         # Add any multi-polygons
         polyLayer = L.geoJson()
@@ -45,7 +47,9 @@ angular.module('fireExplorerApp')
           polyLayer.addData(polygon) for polygon in polygons
 
         # Create a group for these items
-        group = L.featureGroup [marker, polyLayer]
+        group = L.featureGroup []
+        group.addLayer marker if marker
+        group.addLayer polyLayer if polyLayer.getLayers().length
 
         # Setup popup
         pu = '<div popup/>'
